@@ -35,7 +35,7 @@ Each model is trained on weekly-level student-course records (demographics + VLE
 ---
 
 ## 📥 Data Setup
-The following OULAD CSV files are required in the `data/` directory:
+The following OULAD CSV files are required in the `data/raw/anonymisedData/` directory:
 
 - `assessments.csv`
 - `courses.csv`
