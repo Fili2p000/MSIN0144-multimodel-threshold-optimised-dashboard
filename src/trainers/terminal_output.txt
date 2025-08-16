@@ -1,0 +1,318 @@
+PS C:\Users\26358\UCL\MSIN0114 Project\project-root> python -m src.trainers.train_logistic
+Loading data...
+Starting feature engineering...
+Adding cross-course features...
+Adding temporal features...
+Adding demographic interactions...
+Feature engineering completed. Shape: (562912, 69)
+Original data shape: (562912, 69)
+Creating balanced feature set...
+Class distribution: {0: 524688, 1: 38224}
+Adding uncategorized features to numerical: {'total_weekly_clicks', 'relative_effort_ratio', 'courses_count_this_week', 'all_courses_clicks_this_week'}
+Total features: 83
+Using moderate SMOTE
+Training set: (450329, 79)
+Test set: (112583, 79)
+Training Logistic Regression with moderate_smote...
+C:\Users\26358\AppData\Roaming\Python\Python312\site-packages\sklearn\linear_model\_sag.py:348: ConvergenceWarning: The max_iter was reached which means the coef_ did not converge
+  warnings.warn(
+Evaluating model...
+ROC AUC: 0.7349
+Log Loss: 0.6018
+C:\Users\26358\AppData\Roaming\Python\Python312\site-packages\sklearn\linear_model\_sag.py:348: ConvergenceWarning: The max_iter was reached which means the coef_ did not converge
+  warnings.warn(
+C:\Users\26358\AppData\Roaming\Python\Python312\site-packages\sklearn\linear_model\_sag.py:348: ConvergenceWarning: The max_iter was reached which means the coef_ did not converge
+  warnings.warn(
+C:\Users\26358\AppData\Roaming\Python\Python312\site-packages\sklearn\linear_model\_sag.py:348: ConvergenceWarning: The max_iter was reached which means the coef_ did not converge
+  warnings.warn(
+CV AUC: 0.7343 (+/- 0.0018)
+
+=== Threshold Analysis Results ===
+    threshold  precision  recall  f1_score    tp     fp
+0        0.10      0.072   0.994     0.135  7599  97285
+1        0.15      0.076   0.987     0.141  7544  91814
+2        0.20      0.080   0.975     0.148  7453  85451
+3        0.25      0.085   0.953     0.156  7289  78279
+4        0.30      0.091   0.923     0.165  7057  70648
+5        0.35      0.097   0.880     0.175  6727  62440
+6        0.40      0.105   0.828     0.186  6333  53975
+7        0.45      0.114   0.765     0.199  5851  45354
+8        0.50      0.126   0.692     0.213  5288  36806
+9        0.55      0.139   0.607     0.226  4637  28722
+10       0.60      0.155   0.511     0.238  3906  21274
+11       0.65      0.174   0.413     0.245  3156  14934
+12       0.70      0.195   0.303     0.237  2317   9587
+13       0.75      0.223   0.204     0.213  1560   5433
+14       0.80      0.248   0.110     0.153   844   2562
+15       0.85      0.290   0.042     0.074   322    787
+16       0.90      0.297   0.006     0.011    43    102
+
+=== Recommended Threshold Strategies ===
+
+BEST_F1:
+  Threshold: 0.650
+  Precision: 0.174
+  Recall: 0.413
+  F1-Score: 0.245
+  False Positives: 14934.0
+  True Positives: 3156.0
+
+BALANCED:
+  Threshold: 0.750
+  Precision: 0.223
+  Recall: 0.204
+  F1-Score: 0.213
+  False Positives: 5433.0
+  True Positives: 1560.0
+
+HIGH_PRECISION:
+  Threshold: 0.850
+  Precision: 0.290
+  Recall: 0.042
+  F1-Score: 0.074
+  False Positives: 787.0
+  True Positives: 322.0
+
+BUSINESS_OPTIMIZED:
+  Threshold: 0.600
+  Precision: 0.155
+  Recall: 0.511
+  F1-Score: 0.238
+  False Positives: 21274.0
+  True Positives: 3906.0
+
+=== Saving Comprehensive Results ===
+All results saved with base path: artifacts/logistic_regression
+Comprehensive analysis plot saved to artifacts/logistic_final_pipeline_comprehensive_analysis.png
+Pipeline saved to artifacts/logistic_final_pipeline.pkl
+PS C:\Users\26358\UCL\MSIN0114 Project\project-root> python -m src.trainers.train_xgboost 
+Starting feature engineering...
+Adding cross-course features...
+Adding temporal features...
+Adding demographic interactions...
+Feature engineering completed. Shape: (562912, 69)
+warning, following features is not categorised: {'relative_effort_ratio', 'total_weekly_clicks', 'courses_count_this_week', 'all_courses_clicks_this_week'}
+num features (52): ['cum_click_dataplus', 'cum_click_dualpane', 'cum_click_externalquiz', 'cum_click_folder', 'cum_click_forumng', 'cum_click_glossary', 'cum_click_homepage', 'cum_click_htmlactivity', 'cum_click_oucollaborate', 'cum_click_oucontent', 'cum_click_ouelluminate', 'cum_click_ouwiki', 'cum_click_page', 'cum_click_questionnaire', 'cum_click_quiz', 'cum_click_repeatactivity', 'cum_click_resource', 'cum_click_sharedsubpage', 'cum_click_subpage', 'cum_click_url', 'sum_click_dataplus', 'sum_click_dualpane', 'sum_click_externalquiz', 'sum_click_folder', 'sum_click_forumng', 'sum_click_glossary', 'sum_click_homepage', 'sum_click_htmlactivity', 'sum_click_oucollaborate', 'sum_click_oucontent', 'sum_click_ouelluminate', 'sum_click_ouwiki', 'sum_click_page', 'sum_click_questionnaire', 'sum_click_quiz', 'sum_click_repeatactivity', 'sum_click_resource', 'sum_click_sharedsubpage', 'sum_click_subpage', 'sum_click_url', 'week', 'week_start_day', 'num_of_prev_attempts', 'studied_credits', 'course_priority_rank', 'course_progress_ratio', 'weeks_to_course_end', 'repeat_risk_score', 'study_load_intensity', 'is_early_stage', 'is_mid_stage', 'is_final_stage']
+ordinal features (3): ['highest_education', 'imd_band', 'age_band']
+nominal features (5): ['gender', 'region', 'disability', 'age_education_interaction', 'region_deprivation_interaction']
+Class imbalance ratio (negative/positive): 13.73
+Using scale_pos_weight: 13.73
+Training set size: 450,329
+Test set size: 112,583
+Training XGBoost model...
+ROC AUC: 0.8309
+Log Loss: 0.4820
+Best threshold: 0.684 (F1: 0.3450)
+
+=== Multiple Threshold Evaluation ===
+
+Threshold = 0.300:
+  Precision: 0.1214
+  Recall: 0.9313
+  F1-Score: 0.2148
+
+Threshold = 0.400:
+  Precision: 0.1447
+  Recall: 0.8559
+  F1-Score: 0.2476
+  --- Detailed Classification Report ---
+              precision    recall  f1-score   support
+
+           0       0.98      0.63      0.77    104938
+           1       0.14      0.86      0.25      7645
+
+    accuracy                           0.65    112583
+   macro avg       0.56      0.74      0.51    112583
+weighted avg       0.93      0.65      0.73    112583
+
+
+Threshold = 0.500:
+  Precision: 0.1762
+  Recall: 0.7503
+  F1-Score: 0.2854
+
+Threshold = 0.600:
+  Precision: 0.2226
+  Recall: 0.6080
+  F1-Score: 0.3258
+
+Threshold = 0.700:
+  Precision: 0.2905
+  Recall: 0.4191
+  F1-Score: 0.3432
+
+Threshold = 0.684:
+  Precision: 0.2786
+  Recall: 0.4531
+  F1-Score: 0.3450
+
+=== Threshold Comparison Summary ===
+ threshold  precision  recall  f1_score
+    0.3000     0.1214  0.9313    0.2148
+    0.4000     0.1447  0.8559    0.2476
+    0.5000     0.1762  0.7503    0.2854
+    0.6000     0.2226  0.6080    0.3258
+    0.7000     0.2905  0.4191    0.3432
+    0.6836     0.2786  0.4531    0.3450
+Evaluation curves saved to artifacts/xgb_pipeline_evaluation_curves.png
+
+=== Feature Importance Analysis ===
+Top 15 Important Features:
+                                                    feature  importance
+                                          cum_click_forumng    0.019958
+                                         cum_click_homepage    0.019417
+                                        cum_click_oucontent    0.015399
+                                      course_progress_ratio    0.015184
+                                                   gender_F    0.014966
+                                          highest_education    0.014774
+age_education_interaction_35-55_Post Graduate Qualification    0.013441
+      region_deprivation_interaction_Yorkshire Region_10-20    0.013062
+  region_deprivation_interaction_East Midlands Region_0-10%    0.013038
+                                          sum_click_forumng    0.012885
+     region_deprivation_interaction_Yorkshire Region_50-60%    0.012692
+              region_deprivation_interaction_Ireland_20-30%    0.012515
+     region_deprivation_interaction_Yorkshire Region_80-90%    0.012282
+    region_deprivation_interaction_South West Region_20-30%    0.011575
+             region_deprivation_interaction_Ireland_90-100%    0.011467
+Feature importance plot saved to artifacts/xgb_pipeline_feature_importance.png
+XGBoost pipeline saved to artifacts/xgb_pipeline.pkl
+Feature importance saved to artifacts/xgb_pipeline_feature_importance.csv
+
+=== XGBoost Model Summary ===
+Scale Position Weight: 13.73
+Number of features after selection: 112
+ROC AUC: 0.8309
+Log Loss: 0.4820
+Best F1 threshold: 0.684 (F1: 0.3450)
+
+=== Performance Analysis & Recommendations ===
+• Best Precision: 0.2905 at threshold 0.700
+• Best Recall: 0.9313 at threshold 0.300
+• Best F1-Score: 0.3450 at threshold 0.684
+
+=== Threshold Recommendations by Use Case ===
+• Conservative (High Precision): Use threshold ≥ 0.6 (fewer false alarms)
+• Balanced: Use threshold around 0.4-0.5 (balance precision/recall)
+• Sensitive (High Recall): Use threshold ≤ 0.3 (catch more at-risk students)
+• Optimal F1: Use threshold 0.684
+
+=== Overall Model Assessment ===
+Model Performance: Good (ROC AUC: 0.8309)
+⚠️  F1-Score is relatively low - consider:
+   - Collecting more positive samples
+   - Feature engineering improvements
+   - Hyperparameter tuning
+   - Ensemble methods
+
+Threshold analysis saved to artifacts/xgb_pipeline_threshold_analysis.csv
+PS C:\Users\26358\UCL\MSIN0114 Project\project-root> python -m src.trainers.train_catboost
+Starting CatBoost training with comprehensive ML practices...
+Starting feature engineering...
+Adding cross-course features...
+Adding temporal features...
+Adding demographic interactions...
+Feature engineering completed. Shape: (562912, 69)
+Warning: Following features are not categorized: {'relative_effort_ratio', 'total_weekly_clicks', 'all_courses_clicks_this_week', 'courses_count_this_week'}
+Numerical features (52): ['cum_click_dataplus', 'cum_click_dualpane', 'cum_click_externalquiz', 'cum_click_folder', 'cum_click_forumng', 'cum_click_glossary', 'cum_click_homepage', 'cum_click_htmlactivity', 'cum_click_oucollaborate', 'cum_click_oucontent', 'cum_click_ouelluminate', 'cum_click_ouwiki', 'cum_click_page', 'cum_click_questionnaire', 'cum_click_quiz', 'cum_click_repeatactivity', 'cum_click_resource', 'cum_click_sharedsubpage', 'cum_click_subpage', 'cum_click_url', 'sum_click_dataplus', 'sum_click_dualpane', 'sum_click_externalquiz', 'sum_click_folder', 'sum_click_forumng', 'sum_click_glossary', 'sum_click_homepage', 'sum_click_htmlactivity', 'sum_click_oucollaborate', 'sum_click_oucontent', 'sum_click_ouelluminate', 'sum_click_ouwiki', 'sum_click_page', 'sum_click_questionnaire', 'sum_click_quiz', 'sum_click_repeatactivity', 'sum_click_resource', 'sum_click_sharedsubpage', 'sum_click_subpage', 'sum_click_url', 'week', 'week_start_day', 'num_of_prev_attempts', 'studied_credits', 'course_priority_rank', 'course_progress_ratio', 'weeks_to_course_end', 'repeat_risk_score', 'study_load_intensity', 'is_early_stage', 'is_mid_stage', 'is_final_stage']
+Ordinal features (3): ['highest_education', 'imd_band', 'age_band']
+Nominal features (5): ['gender', 'region', 'disability', 'age_education_interaction', 'region_deprivation_interaction']
+Training set: (450329, 64), Positive class ratio: 0.068
+Test set: (112583, 64), Positive class ratio: 0.068
+0:      test: 0.7111432 best: 0.7111432 (0)     total: 377ms    remaining: 6m 17s
+100:    test: 0.8034475 best: 0.8034475 (100)   total: 20.9s    remaining: 3m 5s
+200:    test: 0.8242067 best: 0.8242067 (200)   total: 41.3s    remaining: 2m 44s
+300:    test: 0.8346832 best: 0.8346832 (300)   total: 1m 1s    remaining: 2m 23s
+400:    test: 0.8449363 best: 0.8449363 (400)   total: 1m 22s   remaining: 2m 3s
+500:    test: 0.8505485 best: 0.8505485 (500)   total: 1m 44s   remaining: 1m 43s
+600:    test: 0.8548954 best: 0.8548954 (600)   total: 2m 5s    remaining: 1m 23s
+700:    test: 0.8574730 best: 0.8574730 (700)   total: 2m 26s   remaining: 1m 2s
+800:    test: 0.8605185 best: 0.8605185 (800)   total: 2m 48s   remaining: 41.8s
+900:    test: 0.8623894 best: 0.8623894 (900)   total: 3m 9s    remaining: 20.9s
+999:    test: 0.8639692 best: 0.8640110 (994)   total: 3m 31s   remaining: 0us
+
+bestTest = 0.86401104
+bestIteration = 994
+
+Shrink model to first 995 iterations.
+==================================================
+MODEL EVALUATION RESULTS
+==================================================
+ROC AUC: 0.8640
+PR AUC: 0.3443
+Log Loss: 0.4806
+
+=== THRESHOLD = 0.3 ===
+              precision    recall  f1-score   support
+
+           0       0.99      0.53      0.69    104938
+           1       0.13      0.95      0.23      7645
+
+    accuracy                           0.56    112583
+   macro avg       0.56      0.74      0.46    112583
+weighted avg       0.93      0.56      0.66    112583
+
+Matthews Correlation Coefficient: 0.2414
+
+=== THRESHOLD = 0.4 ===
+              precision    recall  f1-score   support
+
+           0       0.99      0.64      0.78    104938
+           1       0.15      0.90      0.26      7645
+
+    accuracy                           0.66    112583
+   macro avg       0.57      0.77      0.52    112583
+weighted avg       0.93      0.66      0.74    112583
+
+Matthews Correlation Coefficient: 0.2775
+
+=== THRESHOLD = 0.5 ===
+              precision    recall  f1-score   support
+
+           0       0.98      0.74      0.85    104938
+           1       0.19      0.82      0.31      7645
+
+    accuracy                           0.75    112583
+   macro avg       0.59      0.78      0.58    112583
+weighted avg       0.93      0.75      0.81    112583
+
+Matthews Correlation Coefficient: 0.3096
+
+=== THRESHOLD = 0.6 ===
+              precision    recall  f1-score   support
+
+           0       0.98      0.83      0.90    104938
+           1       0.23      0.71      0.35      7645
+
+    accuracy                           0.82    112583
+   macro avg       0.60      0.77      0.63    112583
+weighted avg       0.92      0.82      0.86    112583
+
+Matthews Correlation Coefficient: 0.3373
+
+=== THRESHOLD = 0.7 ===
+              precision    recall  f1-score   support
+
+           0       0.97      0.90      0.93    104938
+           1       0.30      0.56      0.39      7645
+
+    accuracy                           0.88    112583
+   macro avg       0.63      0.73      0.66    112583
+weighted avg       0.92      0.88      0.90    112583
+
+Matthews Correlation Coefficient: 0.3533
+
+Optimal threshold (F1-maximizing): 0.729
+F1-score at optimal threshold: 0.3957
+Evaluation curves saved to artifacts/catboost_pipeline_evaluation_curves.png
+Feature importance plot saved to artifacts/catboost_pipeline_feature_importance.png
+Traceback (most recent call last):
+  File "<frozen runpy>", line 198, in _run_module_as_main
+  File "<frozen runpy>", line 88, in _run_code
+  File "C:\Users\26358\UCL\MSIN0114 Project\project-root\src\trainers\train_catboost.py", line 510, in <module>
+    trainer, results = main(
+                       ^^^^^
+  File "C:\Users\26358\UCL\MSIN0114 Project\project-root\src\trainers\train_catboost.py", line 466, in main
+    feature_names=feat_names,
+                  ^^^^^^^^^^
+NameError: name 'feat_names' is not defined. Did you mean: 'feature_names'?
+PS C:\Users\26358\UCL\MSIN0114 Project\project-root> 
